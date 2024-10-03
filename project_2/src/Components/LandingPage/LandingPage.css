@@ -1,0 +1,185 @@
+@media (min-width: 1440px) {
+    .getStartedContatiner {
+        width: 25%; /* Slightly narrower on large monitors */
+    }
+
+    .about-description {
+        padding-left: 120px; /* Increase padding on large screens */
+        font-size: 28px; /* Slightly larger text */
+    }
+
+    .about-title {
+        font-size: 40px; /* Make the title larger */
+    }
+}
+@media (max-width: 1024px) {
+    .getStartedContatiner {
+        width: 50%; /* Make the container wider */
+    }
+
+    .about-description {
+        padding-left: 60px; /* Reduce padding */
+        font-size: 24px; /* Slightly smaller text */
+    }
+
+    .title {
+        font-size: 28px; /* Reduce title size */
+        padding-left: 40px;
+    }
+
+    .about-title {
+        font-size: 32px; /* Make the title smaller */
+    }
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+    height: 66px;
+    padding: 20px 10px;
+    background-color: white;
+}
+
+.title {
+    flex: 1; 
+    padding-left: 120px; 
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+    font-size: 30px;
+    transform: scale(1.5); 
+    transform-origin: left; 
+}
+
+.auth-container {
+    display: flex;
+    gap: 10px; 
+}
+
+.Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 32px;
+    color: black;
+    font-weight: 600;
+    color: #45C793;
+}
+.SignUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 32px;
+    color: white;
+    background-color: #45C793;
+    border-radius: 50px;
+    font-weight: 600;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.imageBackground {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 20px 10px;
+    background-image: url('https://marketplace.canva.com/EAFm9cdFi94/1/0/1600w/canva-bright-cartoon-green-and-brown-school-books-pattern-desktop-wallpaper-yBscg6QYXac.jpg');
+    background-size: cover;
+    background-position: center;
+    padding-right: 20%;
+    width: auto;
+    height: 60vh;
+    background-color: aqua;
+    position: relative;
+}
+
+.aboutContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    background-color: white; 
+    padding: 40px; 
+}
+.getStartedContatiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    position: relative;
+    width: 30%; 
+    padding: 20px; 
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 40px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    text-align: center; 
+    height: auto; 
+}
+.DisplayText {
+    font-size: 24px; 
+    font-family:'Gill Sans', 'Gill Sans MT';
+    color: #000;
+    padding: 20px;
+    text-align: center; 
+    line-height: 1.4; 
+    font-weight: 400;
+    width: 100%; 
+}
+.getStartedCont {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: auto; 
+    padding: 0;
+}
+.getStarted {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 45px; 
+    color: white;
+    background-color: #45C793;
+    border-radius: 50px;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+.about-title {
+    font-size: 36px; 
+    font-weight: 700; 
+    margin-bottom: 20px;
+    margin-right: 54%;
+}
+
+.about-description {
+    text-align: left; 
+    max-width: 800px; 
+    width: 100%; 
+    display: flex;
+    flex-direction: column; 
+    padding-left: 100px;
+}
+.about-description p {
+    font-size: 25px;
+    margin: 10px 0; 
+    font-weight: 700;
+    color: #333;
+}
