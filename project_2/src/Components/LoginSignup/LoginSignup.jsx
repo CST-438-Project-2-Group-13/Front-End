@@ -27,3 +27,5 @@ export const LoginSignup = () => {
     </div>
   )
 }
+
+export default LoginSignup

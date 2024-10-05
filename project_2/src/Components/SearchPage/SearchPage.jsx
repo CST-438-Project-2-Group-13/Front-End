@@ -1,29 +1,19 @@
 import React from 'react'
-import './LandingPage.css'
-
-export const LandingPage = () => {
+import './SearchPage.css'
+const SearchPage = () => {
   return (
     <div>
         <div className='topBar'>
             <div className='title'>PlotPicks</div>
             <div className='auth-container'>
-                <div className='Login'>Login</div>
-
-                <div className='SignUp'>Sign up</div>
+                <div className='Logout'>LOG OUT</div>
             </div>
         </div>
-        <div className='imageBackground'>
-            <div className='getStartedContatiner'>
-              <div className='DisplayText'>
-              Curate Your Dream Library, One Wish at a Time.
-              </div>
-              <div className='getstartedCont'>
-              <div className='getStarted'>
-                Get started
-              </div>
-              </div>
-              
+        <div className='imageBackground'>  
+            <div className='SearchInput'>
+              <input type='text' placeholder='Search'></input>
             </div>
+            <div className='SearchSubmit'><img src=''></img></div>
         </div>
         <div className='aboutContainer'>
             <h1 class="about-title">Build. Add. Share.</h1>
@@ -34,8 +24,7 @@ export const LandingPage = () => {
             </div>
           </div>
     </div>
-    
   )
 }
 
-export default LandingPage
+export default SearchPage

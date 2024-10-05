@@ -1,0 +1,95 @@
+.topBar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+    height: 66px;
+    padding: 20px 10px;
+    background-color: white;
+}
+.auth-container {
+    display: flex;
+    gap: 10px; 
+}
+.Logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    color: black;
+    font-weight: 600;
+    color: #45C793;
+    padding-right: 10px;
+}
+.imageBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    background-image: url('https://marketplace.canva.com/EAFm9cdFi94/1/0/1600w/canva-bright-cartoon-green-and-brown-school-books-pattern-desktop-wallpaper-yBscg6QYXac.jpg');
+    background-size: cover;
+    background-position: center;
+    width: auto;
+    height: 60vh;
+    background-color: aqua;
+    position: relative;
+}
+.SearchInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: left; 
+    position: relative;
+    width: 30%; 
+    padding: 20px; 
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 40px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    text-align: center; 
+    height: auto; 
+}
+.SearchInput input{
+    height: 20px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #797979;
+    font-size: 19px;
+}
+.about-title {
+    font-size: 36px; 
+    font-weight: 700; 
+    margin-bottom: 20px;
+    margin-right: 54%;
+}
+.SearchSubmit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 45px; 
+    color: white;
+    background-color: black;
+    border-radius: 50px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+}
+
+.about-description {
+    text-align: left; 
+    max-width: 800px; 
+    width: 100%; 
+    display: flex;
+    flex-direction: column; 
+    padding-left: 100px;
+}
+.about-description p {
+    font-size: 25px;
+    margin: 10px 0; 
+    font-weight: 700;
+    color: #333;
+}
