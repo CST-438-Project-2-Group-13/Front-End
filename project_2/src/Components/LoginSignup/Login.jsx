@@ -10,8 +10,7 @@ export const Login = () => {
   const handleLogin = () => {
     // Simulate login logic (e.g., make an API call to validate credentials)
     if (email && password) {
-      // If login is successful, navigate to the landing page
-      navigate('/landing');
+      navigate('/landing'); // If login is successful, navigate to the landing page
     } else {
       alert('Please enter valid credentials');
     }
