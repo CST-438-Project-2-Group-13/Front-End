@@ -1,0 +1,138 @@
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 66px;
+    padding: 20px 10px;
+    background-color: white;
+}
+.auth-container {
+    display: flex;
+    gap: 10px;
+}
+.Logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    color: black;
+    font-weight: 600;
+    color: #45C793;
+    padding-right: 10px;
+}
+.imageBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    background-image: url('https://marketplace.canva.com/EAFm9cdFi94/1/0/1600w/canva-bright-cartoon-green-and-brown-school-books-pattern-desktop-wallpaper-yBscg6QYXac.jpg');
+    background-size: cover;
+    background-position: center;
+    width: auto;
+    height: 60vh;
+    background-color: aqua;
+    position: relative;
+}
+.SearchInput {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 40%; 
+    padding: 10px 20px; 
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 40px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 50px; 
+    margin: 0 auto; 
+}
+.SearchInput input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #797979;
+    font-size: 18px;
+    padding-left: 10px; /* Add some padding inside the input */
+    height: 100%; /* Make sure it stretches fully */
+}
+.about-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-right: 54%;
+}
+.SearchSubmit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px; 
+    height: 35px; 
+    color: white;
+    background-color: black;
+    border-radius: 30px; 
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+.about-description {
+    text-align: left;
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 100px;
+}
+.about-description p {
+    font-size: 25px;
+    margin: 10px 0;
+    font-weight: 700;
+    color: #333;
+}
+
+.searchResults {
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .resultsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .bookCard {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    padding: 15px;
+    height: 100%; 
+  }
+  .bookCard:hover {
+    transform: scale(1.05); 
+  }
+
+  .bookCard img {
+    width: 100%;
+    height: auto;
+    max-height: 250px; 
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .bookCard h3 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+    color: #333;
+    font-weight: 600;
+  }
+  .bookCard p {
+    font-size: 1rem;
+    color: #666;
+  }
