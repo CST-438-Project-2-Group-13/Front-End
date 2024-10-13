@@ -8,7 +8,7 @@ export const LandingPage = () => {
         <div className='topBar'>
         <div><Link to="/landing" className='title'>PlotPicks</Link></div>
             <div className='auth-container'>
-                <div className='Login'><Link to="/" className='LoginText'>Login</Link></div>
+                <div className='Login'><Link to="/login" className='LoginText'>Login</Link></div>
 
                 <div className='SignUp'><Link to="/signup" className='SignUpText'>Sign Up</Link></div>
             </div>
@@ -20,7 +20,7 @@ export const LandingPage = () => {
               </div>
               <div className='getstartedCont'>
               <div className='getStarted'>
-              <div><Link to="/" className='getStartedText'>Get Started</Link></div>
+              <div><Link to="/login" className='getStartedText'>Get Started</Link></div>
               </div>
               </div>
               
