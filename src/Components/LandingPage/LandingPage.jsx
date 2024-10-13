@@ -1,15 +1,16 @@
 import React from 'react'
+import { useNavigate, Link} from 'react-router-dom';
 import './LandingPage.css'
 
 export const LandingPage = () => {
   return (
     <div>
         <div className='topBar'>
-            <div className='title'>PlotPicks</div>
+        <div><Link to="/landing" className='title'>PlotPicks</Link></div>
             <div className='auth-container'>
-                <div className='Login'>Login</div>
+                <div className='Login'><Link to="/" className='LoginText'>Login</Link></div>
 
-                <div className='SignUp'>Sign up</div>
+                <div className='SignUp'><Link to="/signup" className='SignUpText'>Sign Up</Link></div>
             </div>
         </div>
         <div className='imageBackground'>
@@ -19,7 +20,7 @@ export const LandingPage = () => {
               </div>
               <div className='getstartedCont'>
               <div className='getStarted'>
-                Get started
+              <div><Link to="/" className='getStartedText'>Get Started</Link></div>
               </div>
               </div>
               

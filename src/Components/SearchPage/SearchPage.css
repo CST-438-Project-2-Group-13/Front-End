@@ -1,3 +1,6 @@
+.html{
+  background-color: white ;
+}
 .topBar {
     display: flex;
     justify-content: space-between;
@@ -55,8 +58,8 @@
     outline: none;
     color: #797979;
     font-size: 18px;
-    padding-left: 10px; /* Add some padding inside the input */
-    height: 100%; /* Make sure it stretches fully */
+    padding-left: 10px; 
+    height: 100%; 
 }
 .about-title {
     font-size: 36px;
