@@ -3,7 +3,7 @@ const TestPage = () => {
     useEffect(() => {
       const testApiCall = async () => {
         try {
-            const response = await fetch('https://wishlist-6d2453473a19.herokuapp.com/books/');
+            const response = await fetch('https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=shakespeare');
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }

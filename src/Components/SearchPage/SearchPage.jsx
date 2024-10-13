@@ -1,9 +1,10 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
+import { useNavigate, Link} from 'react-router-dom';
 import './SearchPage.css'
 
 const searchBooks = async (query) => {
   try {
-    const response = await fetch('https://cors-anywhere.herokuapp.com/https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=${query}');
+    const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=${query}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -19,6 +20,17 @@ const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedQuery = localStorage.getItem('searchQuery');
+    const savedResults = localStorage.getItem('searchResults');
+
+    if (savedQuery && savedResults) {
+      setSearchQuery(savedQuery);
+      setSearchResults(JSON.parse(savedResults));
+    }
+  }, []);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -28,6 +40,10 @@ const SearchPage = () => {
     try {
       const results = await searchBooks(searchQuery);
       setSearchResults(results);
+
+      // Save the search query and results to localStorage
+      localStorage.setItem('searchQuery', searchQuery);
+      localStorage.setItem('searchResults', JSON.stringify(results));
     } catch (error) {
       console.error('Error searching books:', error);
     } finally {
@@ -35,10 +51,14 @@ const SearchPage = () => {
     }
   };
 
+  const handleCardClick = (book) => {
+    navigate(`/book/${book.id}`, { state: { book } }); // Navigate to the book details page
+  };
+
   return (
     <div>
       <div className='topBar'>
-        <div className='title'>PlotPicks</div>
+      <div><Link to="/search" className='title'>PlotPicks</Link></div>
         <div className='auth-container'>
           <div className='Logout'>LOG OUT</div>
         </div>
@@ -61,10 +81,14 @@ const SearchPage = () => {
           <h2>Search Results</h2>
           <div className='resultsGrid'>
             {searchResults.map(book => (
-              <div key={book.id} className='bookCard'>
-                <img src={book.image} alt={book.title} />
+              <div 
+                key={book.id} 
+                className='bookCard' 
+                onClick={() => handleCardClick(book)} // Navigate on click
+              >
+                <img src={book.smallThumbnail} alt={book.title} />
                 <h3>{book.title}</h3>
-                <p>{book.author}</p>
+                <p>{book.authors}</p>
               </div>
             ))}
           </div>
