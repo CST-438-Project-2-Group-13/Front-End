@@ -4,7 +4,7 @@ import './SearchPage.css'
 
 const searchBooks = async (query) => {
   try {
-    const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=${query}`);
+    const response = await fetch(`https://arcane-fjord-82861-16172c6a1cca.herokuapp.com/https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=${query}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
