@@ -7,14 +7,27 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Simulate login logic (e.g., make an API call to validate credentials)
-    if (username && password) {
-      navigate('/landing'); // If login is successful, navigate to the landing page
-    } else {
-      alert('Please enter valid credentials');
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/login?username=${username}&password=${password}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Login failed: ${response.statusText}`);  // Log error status
+      }
+  
+      const data = await response.json();
+      console.log('Login successful:', data);  // Log success
+      navigate('/'); // Redirect to landing page after successful login
+    } catch (error) {
+      console.error('Error during login:', error);  // Log detailed error
+      alert('Login failed. Please check your credentials and try again.');  // Provide user feedback
     }
-  };
+  };  
 
   return (
     <div className='container'>
@@ -25,7 +38,7 @@ export const Login = () => {
       <div className="inputs">
         <div className="input">
           <input
-            type="username"
+            type="text"
             placeholder="Enter username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
