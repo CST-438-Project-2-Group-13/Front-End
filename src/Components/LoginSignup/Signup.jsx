@@ -9,17 +9,18 @@ export const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/newuser?username=${username}&password=${password}`, {
+      const response = await fetch('https://wishlist-6d2453473a19.herokuapp.com/newuser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ username, password, roles: 'USER' }),
       });
-  
+    
       if (!response.ok) {
         throw new Error(`Signup failed: ${response.statusText}`);  // Log error status
       }
-  
+    
       const data = await response.json();
       console.log('Signup successful:', data);  // Log success
       navigate('/login'); // Redirect to login after successful signup

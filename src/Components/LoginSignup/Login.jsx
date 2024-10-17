@@ -20,9 +20,13 @@ export const Login = () => {
         throw new Error(`Login failed: ${response.statusText}`);  // Log error status
       }
   
-      const data = await response.json();
+      const data = await response.text();  // Use response.text() to handle plain text
       console.log('Login successful:', data);  // Log success
-      navigate('/'); // Redirect to landing page after successful login
+      if (data === "Login successful!") {
+        navigate('/'); // Redirect to landing page after successful login
+      } else {
+        alert('Login failed. Please check your credentials and try again.');
+      }
     } catch (error) {
       console.error('Error during login:', error);  // Log detailed error
       alert('Login failed. Please check your credentials and try again.');  // Provide user feedback
