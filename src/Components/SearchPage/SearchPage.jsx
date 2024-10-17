@@ -58,9 +58,9 @@ const SearchPage = () => {
   return (
     <div>
       <div className='topBar'>
-      <div><Link to="/search" className='title'>PlotPicks</Link></div>
+      <div><Link to="/" className='title'>PlotPicks</Link></div>
         <div className='auth-container'>
-          <div className='Logout'>LOG OUT</div>
+          <div className='LogOut'><Link to="/login" className='LoginText'>LOG OUT</Link></div>
         </div>
       </div>
       <div className='imageBackground'>
@@ -98,13 +98,12 @@ const SearchPage = () => {
           <div className='NoneFound'>No books found</div>
       )}
       <div className='aboutContainer'>
-        <h1 className="about-title">Build. Add. Share.</h1>
-        <div className="about-description">
-          <p>Create as many wish lists, add all the books you want</p>
-          <p>Add books easily from the website</p>
-          <p>Share your wish list with others</p>
+          <h1 class="about-title">Build. Add. Share.</h1>
+          <div class="about-description">
+            <p>Search books, create lists</p>
+            <p>Share your wishlists with others</p>
+            </div>
         </div>
-      </div>
     </div>
   );
 };
