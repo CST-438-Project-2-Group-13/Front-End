@@ -4,7 +4,7 @@ import './SearchPage.css'
 
 const searchBooks = async (query) => {
   try {
-    const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=${query}`);
+    const response = await fetch(`https://arcane-fjord-82861-16172c6a1cca.herokuapp.com/https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=${query}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -41,7 +41,7 @@ const SearchPage = () => {
       const results = await searchBooks(searchQuery);
       setSearchResults(results);
 
-      // Save the search query and results to localStorage
+      
       localStorage.setItem('searchQuery', searchQuery);
       localStorage.setItem('searchResults', JSON.stringify(results));
     } catch (error) {
@@ -52,7 +52,7 @@ const SearchPage = () => {
   };
 
   const handleCardClick = (book) => {
-    navigate(`/book/${book.id}`, { state: { book } }); // Navigate to the book details page
+    navigate(`/book/${book.id}`, { state: { book } });
   };
 
   return (
@@ -78,13 +78,13 @@ const SearchPage = () => {
       </div>
       {searchResults.length > 0 && (
         <div className='searchResults'>
-          <h2>Search Results</h2>
+          <h2 className='SearchResultsT'>Search Results</h2>
           <div className='resultsGrid'>
             {searchResults.map(book => (
               <div 
                 key={book.id} 
                 className='bookCard' 
-                onClick={() => handleCardClick(book)} // Navigate on click
+                onClick={() => handleCardClick(book)}
               >
                 <img src={book.smallThumbnail} alt={book.title} />
                 <h3>{book.title}</h3>
@@ -93,6 +93,9 @@ const SearchPage = () => {
             ))}
           </div>
         </div>
+      )}
+      {searchResults.length == 0 && (
+          <div className='NoneFound'>No books found</div>
       )}
       <div className='aboutContainer'>
         <h1 className="about-title">Build. Add. Share.</h1>
