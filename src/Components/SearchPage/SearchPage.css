@@ -127,6 +127,7 @@
     max-height: 250px; 
     object-fit: contain;
     margin-bottom: 10px;
+    image-rendering: crisp-edges;
   }
 
   .bookCard h3 {

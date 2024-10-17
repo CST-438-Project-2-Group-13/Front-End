@@ -6,7 +6,7 @@ export const LandingPage = () => {
   return (
     <div>
         <div className='topBar'>
-        <div><Link to="/landing" className='title'>PlotPicks</Link></div>
+        <div><Link to="/" className='title'>PlotPicks</Link></div>
             <div className='auth-container'>
                 <div className='Login'><Link to="/login" className='LoginText'>Login</Link></div>
 
