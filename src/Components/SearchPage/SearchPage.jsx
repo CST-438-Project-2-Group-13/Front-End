@@ -78,7 +78,7 @@ const SearchPage = () => {
       </div>
       {searchResults.length > 0 && (
         <div className='searchResults'>
-          <h2>Search Results</h2>
+          <h2 className='SearchResultsT'>Search Results</h2>
           <div className='resultsGrid'>
             {searchResults.map(book => (
               <div 
