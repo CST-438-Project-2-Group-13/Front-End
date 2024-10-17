@@ -4,46 +4,43 @@ import './LoginSignup.css';
 
 export const Signup = () => {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSignup = async () => {
-    if (username && email && password) {
-      try {
-        const response = await fetch('https://wishlist-6d2453473a19.herokuapp.com/new-user?username=test&password=test', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, email, password }),
-        });
-
-        if (response.ok) {
-          alert('User created successfully!');
-          navigate('/');
-        } else {
-          alert('Failed to create user');
-        }
-      } catch (error) {
-        console.error('Error creating user:', error);
+    try {
+      const response = await fetch('https://wishlist-6d2453473a19.herokuapp.com/newuser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, roles: 'USER' }),
+      });
+    
+      if (!response.ok) {
+        throw new Error(`Signup failed: ${response.statusText}`);  // Log error status
       }
-    } else {
-      alert('Please fill out all fields');
+    
+      const data = await response.json();
+      console.log('Signup successful:', data);  // Log success
+      navigate('/login'); // Redirect to login after successful signup
+    } catch (error) {
+      console.error('Error during signup:', error);  // Log detailed error
+      alert('Signup failed. Please try again.');  // Provide user feedback
     }
-  };
+  };  
 
   return (
     <div className='container'>
       <div className="header">
-        <div className="text">Sign Up</div>
+        <div className="text">Create an account</div>
         <div className="underline"></div>
       </div>
       <div className="inputs">
         <div className="input">
           <input
             type="text"
-            placeholder="Enter a Username"
+            placeholder="Choose a username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -51,7 +48,7 @@ export const Signup = () => {
         <div className="input">
           <input
             type="password"
-            placeholder="Enter Password"
+            placeholder="Choose a password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -65,7 +62,7 @@ export const Signup = () => {
           Already have an account?{' '}
           <span
             style={{ textDecoration: 'underline', cursor: 'pointer' }}
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/login')}
           >
             Log in
           </span>

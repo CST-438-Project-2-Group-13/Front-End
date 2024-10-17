@@ -6,17 +6,17 @@ export const LandingPage = () => {
   return (
     <div>
         <div className='topBar'>
-        <div><Link to="/landing" className='title'>PlotPicks</Link></div>
+        <div><Link to="/" className='title'>PlotPicks</Link></div>
             <div className='auth-container'>
-                <div className='Login'><Link to="/login" className='LoginText'>Login</Link></div>
-
+                <div className='Login'><Link to="/login" className='LoginText'>Log In</Link></div>
                 <div className='SignUp'><Link to="/signup" className='SignUpText'>Sign Up</Link></div>
             </div>
         </div>
         <div className='imageBackground'>
             <div className='getStartedContatiner'>
               <div className='DisplayText'>
-              Curate Your Dream Library, One Wish at a Time.
+              <p>Curate your dream library,</p>
+              <p>one wish at a time.</p>
               </div>
               <div className='getstartedCont'>
               <div className='getStarted'>
@@ -29,9 +29,8 @@ export const LandingPage = () => {
         <div className='aboutContainer'>
             <h1 class="about-title">Build. Add. Share.</h1>
             <div class="about-description">
-              <p>Create as many wish lists, add all the books you want</p>
-              <p>Add books easily from the website</p>
-              <p>Share your wish list with others</p>
+              <p>Search books, create lists</p>
+              <p>Share your wishlists with others</p>
             </div>
           </div>
     </div>
