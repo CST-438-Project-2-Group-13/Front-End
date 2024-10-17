@@ -35,7 +35,7 @@
     background-position: center;
     width: auto;
     height: 60vh;
-    background-color: aqua;
+    background-color: white;
     position: relative;
 }
 .SearchInput {
@@ -74,7 +74,7 @@
     width: 100px; 
     height: 35px; 
     color: white;
-    background-color: black;
+    background-color: #45C793;
     border-radius: 30px; 
     font-weight: 600;
     font-size: 14px;

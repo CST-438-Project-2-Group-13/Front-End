@@ -7,6 +7,7 @@ import { Signup } from './Components/LoginSignup/Signup';
 import SearchPage from './Components/SearchPage/SearchPage';
 import TestPage from './Components/TestPage1/TestPage';
 import BookDetails from './Components/BookDetails/BookDetails';
+import ListPage from './Components/ListPage/ListPage';
 function App() {
   return (
     <div>
@@ -18,6 +19,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/testPage" element={<TestPage />} />
             <Route path="/book/:id" element={<BookDetails />} />
+            <Route path="/ListPage" element={<ListPage />} />
           </Routes>
         </Router>
       </div>
