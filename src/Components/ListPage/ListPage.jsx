@@ -5,9 +5,12 @@ const ListPage = () => {
   const [wishlists, setWishlists] = useState([]);
   const [selectedWishlist, setSelectedWishlist] = useState(null);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage['user']);
+  const userId = user.userId;
+  console.log(user);
   useEffect(() => {
     //Current fetching for a specific user
-    fetch('https://wishlist-6d2453473a19.herokuapp.com/api/wishlists/user/2')
+    fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/wishlists/user/${userId}`)
       .then(response => response.json())
       .then(data => setWishlists(data))
       .catch(error => console.error('Error fetching wishlists:', error));
@@ -34,10 +37,15 @@ const ListPage = () => {
               wishlists.map((wishlist, index) => (
                 <div key={index} onClick={() => handleWishlistClick(wishlist)} className='bookCard'>
                   <h3>{wishlist.title}</h3>
-                </div>
+                </div>                                                                  
               ))
             ) : (
+            <>
               <p>No wishlists available</p>
+              <div>
+              <button>Create New Wishlist</button>
+              </div>
+            </>  
             )}
           </div>
         </div>

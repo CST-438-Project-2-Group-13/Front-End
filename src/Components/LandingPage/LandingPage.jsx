@@ -29,7 +29,7 @@ export const LandingPage = () => {
               </div>
               <div className='getstartedCont'>
               <div className='getStarted'>
-              <div><Link to="/login" className='getStartedText'>Get Started</Link></div>
+              <div><Link to={localStorage['token'].length > 20 ? "/ListPage" : "/login" }className='getStartedText'>Get Started</Link></div>
               </div>
               </div>
               
