@@ -19,19 +19,44 @@ export const Login = () => {
       if (!response.ok) {
         throw new Error(`Login failed: ${response.statusText}`);  // Log error status
       }
-  
-      const data = await response.text();  // Use response.text() to handle plain text
-      console.log('Login successful:', data);  // Log success
-      if (data === "Login successful!") {
-        navigate('/'); // Redirect to landing page after successful login
-      } else {
-        alert('Login failed. Please check your credentials and try again.');
-      }
+      
+      const token = await response.text();
+      localStorage.setItem("token", token);  // Save JWT in localStorage
+      console.log("Token:", token);
+      
     } catch (error) {
       console.error('Error during login:', error);  // Log detailed error
       alert('Login failed. Please check your credentials and try again.');  // Provide user feedback
     }
+    const user = await fetchProtectedData();
+    if (user != null){
+      console.log(user);
+      localStorage.setItem("user", user);
+      navigate('/', { state: { user : user } });
+    } else {
+      alert('Login failed. Please check your credentials and try again.');
+    }
   };  
+
+  const fetchProtectedData = async () => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("https://wishlist-6d2453473a19.herokuapp.com/protected", {
+      method: "GET",
+      headers: {
+        Authorization: token,  // Send JWT in Authorization header
+      },
+    });
+
+    const user = await response.json();
+    console.log(user);
+    return user;
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    console.log("Logged out");
+  };
 
   return (
     <div className='container'>
