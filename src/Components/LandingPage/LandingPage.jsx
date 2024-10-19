@@ -8,7 +8,7 @@ export const LandingPage = () => {
   localStorage.setItem("user", JSON.stringify(location.state.user));
   console.log(location.state.user);
   console.log(localStorage["token"]);
-  console.log("is this defined? ", JSON.parse(localStorage.getItem("user")));
+  console.log("Is this defined? ", JSON.parse(localStorage.getItem("user")));
   const user = localStorage.getItem("user");
   return (
     <div>
@@ -24,7 +24,8 @@ export const LandingPage = () => {
         <div className='imageBackground'>
             <div className='getStartedContatiner'>
               <div className='DisplayText'>
-              Curate Your Dream Library, One Wish at a Time.
+              <p>Curate your dream library,</p>
+              <p>one wish at a time.</p>
               </div>
               <div className='getstartedCont'>
               <div className='getStarted'>
@@ -37,9 +38,8 @@ export const LandingPage = () => {
         <div className='aboutContainer'>
             <h1 class="about-title">Build. Add. Share.</h1>
             <div class="about-description">
-              <p>Create as many wish lists, add all the books you want</p>
-              <p>Add books easily from the website</p>
-              <p>Share your wish list with others</p>
+              <p>Search books, create lists</p>
+              <p>Share your wishlists with others</p>
             </div>
           </div>
     </div>

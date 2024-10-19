@@ -77,7 +77,7 @@ const BookDetails = () => {
         <p><strong>Author:</strong> {book.authors}</p>
         <p><strong>Category: </strong>{book.categories}</p>
         <p className='description'><strong>Description:</strong> {book.description}</p>
-        <button onClick={addToWishlist} >
+        <button className="addButton" onClick={addToWishlist} >
           Add to Wishlist
         </button>
 
