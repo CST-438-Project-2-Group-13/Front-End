@@ -41,7 +41,7 @@ export const Login = () => {
       }
     } catch (error) {
       console.error('Error during login:', error);
-      //alert('Login failed. Please check your credentials and try again.');
+      alert('Login failed. Please check your credentials and try again.');
     }
   };
 
