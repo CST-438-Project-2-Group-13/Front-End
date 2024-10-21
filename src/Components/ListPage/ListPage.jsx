@@ -21,12 +21,18 @@ const ListPage = () => {
   const handleBookClick = (book) => {
     navigate(`/book/${book.id}`, { state: { book } });
   };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    console.log("Logged out");
+    navigate("/login");
+  };
   return (
     <div className='page-container'>
       <div className='topBar'>
         <div><Link to="/search" className='title'>PlotPicks</Link></div>
         <div className='auth-container'>
-          <div className='Logout'>LOG OUT</div>
+          <div className='Logout'><button onClick={handleLogout}>LOG OUT</button></div>
         </div>
       </div>
       <div className='main-layout'>
