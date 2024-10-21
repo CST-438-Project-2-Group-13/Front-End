@@ -8,35 +8,43 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/login?username=${username}&password=${password}`, {
+  try {
+    const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/login?username=${username}&password=${password}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (!response.ok) {
-        throw new Error(`Login failed: ${response.statusText}`);  // Log error status
+        throw new Error(`Login failed: ${response.statusText}`);
       }
       
       const token = await response.text();
-      localStorage.setItem("token", token);  // Save JWT in localStorage
-      console.log("Token:", token);
       
+      if (token !== "Login failed. Check your credentials.") {
+        localStorage.setItem("token", token);  // Save the token
+        console.log("Token:", token);
+
+        // Fetch protected data
+        const user = await fetchProtectedData();
+        console.log("user after /protected", user);
+        if (user) {
+          console.log("User:", user);
+          localStorage.setItem("user", JSON.stringify(user));  // Save user data to localStorage
+          navigate('/', { state: { user } });
+        } else {
+          alert('Login failed. Please check your credentials and try again.');
+        }
+      } else {
+        alert('Login failed. Check your credentials.');
+      }
     } catch (error) {
-      console.error('Error during login:', error);  // Log detailed error
-      alert('Login failed. Please check your credentials and try again.');  // Provide user feedback
-    }
-    const user = await fetchProtectedData();
-    if (user != null){
-      console.log(user);
-      localStorage.setItem("user", user);
-      navigate('/', { state: { user : user } });
-    } else {
+      console.error('Error during login:', error);
       alert('Login failed. Please check your credentials and try again.');
     }
-  };  
+  };
+
 
   const fetchProtectedData = async () => {
     const token = localStorage.getItem("token");
@@ -44,17 +52,35 @@ export const Login = () => {
     const response = await fetch("https://wishlist-6d2453473a19.herokuapp.com/protected", {
       method: "GET",
       headers: {
-        Authorization: token,  // Send JWT in Authorization header
+        Authorization: `${token}`,
       },
     });
 
-    const user = await response.json();
-    console.log(user);
-    return user;
+    if (!response.ok) {
+      console.error('Failed to fetch protected data:', response.statusText);
+      return null;
+    }
+
+    const text = await response.text(); // Get raw text response
+    try {
+      const user = JSON.parse(text); // Try to parse as JSON
+      
+      if (user && (Object.keys(user).length > 0)) {
+        return user;
+      } else {
+        return {};
+      }
+    } catch (error) {
+      console.error('Error parsing JSON:', error, 'Response text:', text);
+      return null; // Return null if JSON parsing fails
+    }
   };
+
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     console.log("Logged out");
   };
 

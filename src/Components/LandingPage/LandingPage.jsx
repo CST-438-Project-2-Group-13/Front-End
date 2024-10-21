@@ -5,16 +5,20 @@ import './LandingPage.css'
 
 export const LandingPage = () => {
   const location = useLocation();
-  localStorage.setItem("user", JSON.stringify(location.state.user));
-  console.log(location.state.user);
-  console.log(localStorage["token"]);
-  console.log("Is this defined? ", JSON.parse(localStorage.getItem("user")));
-  const user = localStorage.getItem("user");
+  if(location.state != null){
+    localStorage.setItem("user", JSON.stringify(location.state.user));
+  }
+  
+  //console.log("Is this defined? ", JSON.parse(localStorage.getItem("user")));
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(localStorage.getItem("user")) : null;
   return (
     <div>
         <div className='topBar'>
         <div><Link to="/landing" className='title'>PlotPicks</Link></div>
-            <div><p>{'Welcome, ' + location.state.user.username}</p></div> 
+          <div>
+            {user ? <p>{'Welcome, ' + user.username}</p> : <p>Welcome, Guest!</p>} 
+          </div>  
             <div className='auth-container'>
                 <div className='Login'><Link to="/login" className='LoginText'>Login</Link></div>
                 
@@ -29,7 +33,7 @@ export const LandingPage = () => {
               </div>
               <div className='getstartedCont'>
               <div className='getStarted'>
-              <div><Link to={localStorage['token'].length > 20 ? "/ListPage" : "/login" }className='getStartedText'>Get Started</Link></div>
+              <div><Link to={localStorage['token'] ? "/ListPage" : "/login" }className='getStartedText'>Get Started</Link></div>
               </div>
               </div>
               
