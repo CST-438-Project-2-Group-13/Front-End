@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './ListPage.css'
 
 const NewListPage = () => {
   const [title, setTitle] = useState('');
