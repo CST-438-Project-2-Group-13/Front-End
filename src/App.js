@@ -9,6 +9,7 @@ import TestPage from './Components/TestPage1/TestPage';
 import BookDetails from './Components/BookDetails/BookDetails';
 import ListPage from './Components/ListPage/ListPage';
 import NewListPage from './Components/NewList/NewListPage';
+import EditUser from './Components/EditUser/EditUser';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/book/:id" element={<BookDetails />} />
             <Route path="/ListPage" element={<ListPage />} />
             <Route path="/newList" element={<NewListPage />} />
+            <Route path="/editProfile" element={<EditUser />} />
           </Routes>
         </Router>
       </div>

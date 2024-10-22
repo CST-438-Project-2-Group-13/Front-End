@@ -1,5 +1,5 @@
 @media (min-width: 1440px) {
-    .getStartedContatiner {
+    .getStartedContainer {
         width: 25%; /* Slightly narrower on large monitors */
     }
 
@@ -13,7 +13,7 @@
     }
 }
 @media (max-width: 1024px) {
-    .getStartedContatiner {
+    .getStartedContainer {
         width: 50%; /* Make the container wider */
     }
 
@@ -116,7 +116,8 @@ html, body {
     background-color: white; 
     padding: 40px; 
 }
-.getStartedContatiner {
+
+.getStartedContainer {
     display: flex;
     flex-direction: column;
     justify-content: center; 
@@ -131,6 +132,7 @@ html, body {
     text-align: center; 
     height: auto; 
 }
+
 .DisplayText {
     font-size: 24px; 
     font-family:'Gill Sans', 'Gill Sans MT';
@@ -141,6 +143,7 @@ html, body {
     font-weight: 400;
     width: 100%; 
 }
+
 .getStartedCont {
     display: flex;
     justify-content: center; 
@@ -148,6 +151,7 @@ html, body {
     width: auto; 
     padding: 0;
 }
+
 .getStarted {
     display: flex;
     justify-content: center;
@@ -162,6 +166,7 @@ html, body {
     padding: 10px 20px;
     font-size: 16px;
 }
+
 .about-title {
     font-size: 36px; 
     font-weight: 700; 
@@ -177,21 +182,59 @@ html, body {
     flex-direction: column; 
     padding-left: 100px;
 }
+
 .about-description p {
     font-size: 25px;
     margin: 10px 0; 
     font-weight: 700;
     color: #333;
 }
+
 .getStartedText{
     text-decoration: none;
     color: white;
 }
+
 .LoginText{
     text-decoration: none;
     color: #45C793;
 }
+
 .SignUpText{
+    text-decoration: none;
+    color: white;
+}
+
+/* Button container to align buttons side by side */
+.button-container {
+    display: flex;
+    justify-content: center;  /* Center the buttons */
+    gap: 15px; /* Add space between the buttons */
+    margin-top: 20px; /* Space above the button group */
+}
+  
+/* Small buttons for search and edit profile */
+.small-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px; /* Smaller width than the 'Get Started' button */
+    height: 40px; 
+    color: white;
+    background-color: #45C793;
+    border-radius: 50px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.small-button:hover {
+    background-color: #3ca882; /* Slightly darker green on hover */
+}
+  
+.small-button-text {
+    font-size: 14px; /* Smaller font size for the buttons */
     text-decoration: none;
     color: white;
 }
