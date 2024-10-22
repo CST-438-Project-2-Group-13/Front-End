@@ -8,6 +8,8 @@ import SearchPage from './Components/SearchPage/SearchPage';
 import TestPage from './Components/TestPage1/TestPage';
 import BookDetails from './Components/BookDetails/BookDetails';
 import ListPage from './Components/ListPage/ListPage';
+import NewListPage from './Components/NewList/NewListPage';
+
 function App() {
   return (
     <div>
@@ -20,6 +22,7 @@ function App() {
             <Route path="/testPage" element={<TestPage />} />
             <Route path="/book/:id" element={<BookDetails />} />
             <Route path="/ListPage" element={<ListPage />} />
+            <Route path="/newList" element={<NewListPage />} />
           </Routes>
         </Router>
       </div>
