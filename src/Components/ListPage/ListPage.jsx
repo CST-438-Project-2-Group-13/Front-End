@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './ListPage.css'
+import NavBar from '../NavBar/NavBar';
 
 const ListPage = () => {
   const [wishlists, setWishlists] = useState([]);
@@ -38,6 +39,7 @@ const ListPage = () => {
 
   return (
     <div className='page-container'>
+      <NavBar/>
       <div className='topBar'>
         <div><Link to="/search" className='title'>PlotPicks</Link></div>
         <div className='auth-container'>

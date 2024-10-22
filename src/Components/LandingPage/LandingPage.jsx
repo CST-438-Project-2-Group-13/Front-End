@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 import './LandingPage.css'
+import NavBar from '../NavBar/NavBar';
 
 export const LandingPage = () => {
   const location = useLocation();
@@ -14,6 +15,7 @@ export const LandingPage = () => {
   const user = storedUser ? JSON.parse(localStorage.getItem("user")) : null;
   return (
     <div>
+      <NavBar/>
         <div className='topBar'>
         <div><Link to="/landing" className='title'>PlotPicks</Link></div>
           <div>

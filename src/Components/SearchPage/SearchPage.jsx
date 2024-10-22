@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import { useNavigate, Link} from 'react-router-dom';
 import './SearchPage.css'
+import NavBar from '../NavBar/NavBar';
 
 const searchBooks = async (query) => {
   try {
@@ -52,11 +53,12 @@ const SearchPage = () => {
   };
 
   const handleCardClick = (book) => {
-    navigate(`/book/${book.id}`, { state: { book } });
+    navigate(`/book/${book.title}`, { state: { book } });
   };
 
   return (
     <div>
+      <NavBar/>
       <div className='topBar'>
       <div><Link to="/" className='title'>PlotPicks</Link></div>
         <div className='auth-container'>

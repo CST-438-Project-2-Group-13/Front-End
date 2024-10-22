@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './BookDetails.css';
+import NavBar from '../NavBar/NavBar';
 
 const BookDetails = () => {
   const location = useLocation();
@@ -94,6 +95,7 @@ const BookDetails = () => {
 
   return (
     <div>
+       <NavBar/>
       <div className='topBar'>
         <div><Link to="/search" className='title'>PlotPicks</Link></div>
         <div className='auth-container'>

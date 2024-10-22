@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
 
 const NewListPage = () => {
   const [title, setTitle] = useState('');
@@ -33,6 +34,7 @@ const NewListPage = () => {
 
   return (
     <div className='new-list-container'>
+      <NavBar/>
       <h2>Create a New Wishlist</h2>
       <form onSubmit={handleCreateList}>
         <div className='form-group'>
