@@ -15,12 +15,31 @@ const AdminPage = () => {
     };
 
     useEffect(() => {
-        // Fetch wishlists for the specific user
-        fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users`)
-            .then(response => response.json())
-            .then(data => setUsers(data))
-            .catch(error => console.error('Error fetching userss:', error));
-    });
+        const token = localStorage.getItem('token'); // Get the token from localStorage
+
+        if (token) {
+            // Fetch users with Authorization header
+            fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json(); // Parse JSON data
+                    } else {
+                        throw new Error('Failed to fetch users');
+                    }
+                })
+                .then(data => setUsers(data)) // Set the users state with the response data
+                .catch(error => console.error('Error fetching users:', error));
+        } else {
+            console.log('No token found');
+            navigate('/login'); // Redirect to login if no token is found
+        }
+    }, [navigate]);
     return (
         <div>
             <div className='topBar'>
