@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './LandingPage.css';
+import Header from '../Header/Header';
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -24,24 +25,17 @@ export const LandingPage = () => {
 
   return (
     <div>
-      <div className='topBar'>
-        <div><Link to="/" className='title'>PlotPicks</Link></div>
-        <div>
-          {user ? <p>{'Welcome, ' + user.username}</p> : <p>Welcome, Guest!</p>}
-        </div>
-        <div className='auth-container'>
-          {user ? (
-            <div className='Login' onClick={handleLogout}>
-              <p className='LoginText'>Log Out</p>
-            </div>
-          ) : (
-            <>
-              <div className='Login'><Link to="/login" className='LoginText'>Login</Link></div>
-              <div className='SignUp'><Link to="/signup" className='SignUpText'>Sign Up</Link></div>
-            </>
-          )}
-        </div>
-      </div>
+      {/* Use the Header component with props */}
+      <Header 
+        user={user} 
+        handleLogout={handleLogout} 
+        showWelcome={true} 
+        showSignUp={true} 
+        showSearch={true} 
+        showMyLists={true} 
+        showProfile={true} 
+      />
+
       <div className='imageBackground'>
         <div className='getStartedContainer'>
           <div className='DisplayText'>
@@ -50,7 +44,9 @@ export const LandingPage = () => {
           </div>
           <div className='getstartedCont'>
             <div className='getStarted'>
-              <div><Link to={user ? "/ListPage" : "/login"} className='getStartedText'>Get Started</Link></div>
+              <div>
+                <Link to={user ? "/ListPage" : "/login"} className='getStartedText'>Get Started</Link>
+              </div>
             </div>
           </div>
           {user && (
