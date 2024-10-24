@@ -1,7 +1,24 @@
 import React from 'react';
 import './EditUser.css';
-
+import { useNavigate, Link} from 'react-router-dom';
+import Header from '../Header/Header';
 export const EditUser = () => {
+
+  const user = JSON.parse(localStorage['user']);
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      localStorage.removeItem('user');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   const handleSaveChanges = () => {
     // Logic for saving changes
   };
@@ -11,10 +28,21 @@ export const EditUser = () => {
   };
 
   return (
-    <div className='container'>
-      <div className="header">
-        <div className="text">Edit Profile</div>
-        <div className="underline"></div>
+    <div>
+      <Header 
+        user={user} 
+        handleLogout={handleLogout} 
+        showWelcome={false} 
+        showSignUp={true} 
+        showSearch={true} 
+        showMyLists={true} 
+        showProfile={true} 
+      />
+      <div className='container'>
+      
+        <div className="header">
+          <div className="text">Edit Profile</div>
+          <div className="underline"></div>
       </div>
       <div className="inputs">
         <div className="input">
@@ -34,6 +62,8 @@ export const EditUser = () => {
         <button className="submit" onClick={handleSaveChanges}>Confirm Changes</button>
         <button className="submit delete" onClick={handleDeleteAccount}>Delete Account</button>
       </div>
+      </div>
+     
     </div>
   );
 };

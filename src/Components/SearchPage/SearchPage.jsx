@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import { useNavigate, Link} from 'react-router-dom';
 import './SearchPage.css'
-
+import Header from '../Header/Header';
 const searchBooks = async (query) => {
   try {
     const response = await fetch(`https://arcane-fjord-82861-16172c6a1cca.herokuapp.com/https://wishlist-6d2453473a19.herokuapp.com/searchBooks?query=${query}`);
@@ -21,7 +21,7 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const user = JSON.parse(localStorage['user']);
   useEffect(() => {
     const savedQuery = localStorage.getItem('searchQuery');
     const savedResults = localStorage.getItem('searchResults');
@@ -70,12 +70,15 @@ const SearchPage = () => {
 
   return (
     <div>
-      <div className='topBar'>
-        <div><Link to="/" className='title'>PlotPicks</Link></div>
-        <div className='auth-container'>
-          <div className='LogOut' onClick={handleLogout}><p className='LoginText'>LOG OUT</p></div>
-        </div>
-      </div>
+      <Header 
+        user={user} 
+        handleLogout={handleLogout} 
+        showWelcome={false} 
+        showSignUp={true} 
+        showSearch={true} 
+        showMyLists={true} 
+        showProfile={true} 
+      />
       <div className='imageBackground'>
         <form onSubmit={handleSearch} className='SearchInput'>
           <input 

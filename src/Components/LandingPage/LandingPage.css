@@ -75,7 +75,57 @@ html, body {
     height: 32px;
     color: black;
     font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     color: #45C793;
+}
+.LoginText:hover{
+    color :#3ca882;
+}
+.MyLists{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 32px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #45C793;
+}
+.MyLists:hover{
+    color :#3ca882;
+}
+.SearchBooks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 32px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #45C793;
+}
+.SearchBooks:hover{
+    color :#3ca882;
+}
+.MyProfile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 32px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #45C793;
+}
+.MyProfileText:hover{
+    color :#3ca882;
 }
 .SignUp {
     display: flex;
@@ -90,6 +140,11 @@ html, body {
     padding-bottom: 3px;
     padding-left: 10px;
     padding-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.SignUp:hover{
+    background-color: #3ca882;
 }
 
 .imageBackground {
@@ -165,8 +220,11 @@ html, body {
     text-align: center;
     padding: 10px 20px;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
-
+.getStarted:hover{
+    background-color: #3ca882;
+}
 .about-title {
     font-size: 36px; 
     font-weight: 700; 
