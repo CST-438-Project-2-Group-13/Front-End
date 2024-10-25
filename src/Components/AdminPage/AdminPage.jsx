@@ -7,31 +7,32 @@ const AdminPage = () => {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const [isOn, setIsOn] = useState(false); // Initial state is "off"
+    const token = localStorage.getItem('token');
 
     const handleToggle = () => {
         setIsOn(!isOn);
     };
 
-    const handleDeleteUser = async () => {
+    const handleDeleteUser = async (user) => {
         try {
-            const response = await fetch('https://wishlist-6d2453473a19.herokuapp.com/api/admin/users', {
+            const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users?username=${user.username}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password, roles: 'USER' }),
+                    'Authorization': `Bearer ${token}`
+                }
             });
 
-            if (!response.ok) {
-                throw new Error(`Signup failed: ${response.statusText}`);  // Log error status
+            if (response.ok) {
+                console.log(`User ${user.name} deleted successfully`);
+                await fetchUsers();
+            } else {
+                throw new Error(`Delete failed: ${response.statusText}`);  // Log error status
             }
 
-            const data = await response.json();
-            console.log('Signup successful:', data);  // Log success
-            navigate('/login'); // Redirect to login after successful signup
+            const data = await response;
+            console.log(`${user.username}, User deletion successful:`, data);  // Log success
         } catch (error) {
-            console.error('Error during signup:', error);  // Log detailed error
-            alert('Signup failed. Please try again.');  // Provide user feedback
+            console.error('Error deleting user:', error);  // Log detailed error
         }
     };
 
@@ -43,32 +44,38 @@ const AdminPage = () => {
         navigate("/login");
     };
 
-    useEffect(() => {
+    const fetchUsers = async () => {
         const token = localStorage.getItem('token'); // Get the token from localStorage
 
         if (token) {
-            // Fetch users with Authorization header
-            fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json(); // Parse JSON data
-                    } else {
-                        throw new Error('Failed to fetch users');
+            try {
+                const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     }
-                })
-                .then(data => setUsers(data)) // Set the users state with the response data
-                .catch(error => console.error('Error fetching users:', error));
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setUsers(data); // Set the users state with the response data
+                } else {
+                    throw new Error('Failed to fetch users');
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
         } else {
             console.log('No token found');
             navigate('/login'); // Redirect to login if no token is found
         }
+    };
+
+    useEffect(() => {
+        fetchUsers();
     }, [navigate]);
+
     return (
         <div>
             <div className='adminTopBar'>
@@ -110,7 +117,7 @@ const AdminPage = () => {
                                     <p>{user.roles}</p>
                                     {isOn===true && (
                                         <>
-                                            <button className='deleteButton'>X</button>
+                                            <button className='deleteButton' onClick={() => handleDeleteUser(user)}>X</button>
                                             <button className='action-button'>Change Username</button>
                                             <button className='action-button'>Switch Role</button>
                                         </>
