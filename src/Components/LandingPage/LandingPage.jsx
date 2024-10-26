@@ -49,7 +49,7 @@ export const LandingPage = () => {
               </div>
             </div>
           </div>
-          {user && (
+          {/* {user && (
             <div className="button-container">
               <div className="small-button" onClick={() => navigate('/search')}>
                 <p className="small-button-text">Search books</p>
@@ -58,8 +58,14 @@ export const LandingPage = () => {
                 <p className="small-button-text">Edit Profile</p>
               </div>
             </div>
-          )}
+          )} */}
         </div>
+      </div>
+      <div className='aboutContainer'>
+          <h1 class="about-title">Build. Add. Organize.</h1>
+          <div class="about-description">
+            <p>Search Books And Create Lists</p>
+            </div>
       </div>
     </div>
   );
