@@ -13,6 +13,8 @@ const AdminPage = () => {
 
     const handleToggle = () => {
         setIsOn(!isOn);
+        setIsEditing(null);
+        setNewUsername('');
     };
 
     const handleAddNewUser = async (username,password,role) => {
