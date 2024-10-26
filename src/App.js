@@ -10,8 +10,9 @@ import BookDetails from './Components/BookDetails/BookDetails';
 import ListPage from './Components/ListPage/ListPage';
 import NewListPage from './Components/NewList/NewListPage';
 import EditUser from './Components/EditUser/EditUser';
-import BLBookDetails from './Components/BookDetails/BLBookDetails';
 import AdminPage from './Components/AdminPage/AdminPage';
+import BLBookDetails from './Components/BookDetails/BLBookDetails';
+
 function App() {
   return (
     <div>
@@ -26,8 +27,8 @@ function App() {
             <Route path="/ListPage" element={<ListPage />} />
             <Route path="/newList" element={<NewListPage />} />
             <Route path="/editProfile" element={<EditUser />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/blbookdetails/:title" element={<BLBookDetails />} />
-            <Route path="/admin" element={<AdminPage/>}/>
           </Routes>
         </Router>
       </div>
