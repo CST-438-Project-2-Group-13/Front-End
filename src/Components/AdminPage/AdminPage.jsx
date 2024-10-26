@@ -5,6 +5,8 @@ import './AdminPage.css';
 
 const AdminPage = () => {
     const [users, setUsers] = useState([]);
+    const [isEditing, setIsEditing] = useState(null);  // Track editing user
+    const [newUsername, setNewUsername] = useState('');
     const navigate = useNavigate();
     const [isOn, setIsOn] = useState(false); // Initial state is "off"
     const token = localStorage.getItem('token');
@@ -13,7 +15,32 @@ const AdminPage = () => {
         setIsOn(!isOn);
     };
 
+    const handleAddNewUser = async (username,password,role) => {
+        try {
+            const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users?username=${username}&password=${password}&role=${role}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                console.log(`User created successfully`);
+                await fetchUsers();
+            } else {
+                throw new Error(`User creation failed: ${response.statusText}`);  // Log error status
+            }
+        } catch (error) {
+            console.error('Error creating user:', error);  // Log detailed error
+        }
+    };
+
     const handleDeleteUser = async (user) => {
+        const isConfirmed = window.confirm(`Are you sure you want to delete ${user.username}?`);
+
+        if (!isConfirmed) {
+            return; // Exit if the user cancels
+        }
         try {
             const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users?username=${user.username}`, {
                 method: 'DELETE',
@@ -23,19 +50,71 @@ const AdminPage = () => {
             });
 
             if (response.ok) {
-                console.log(`User ${user.name} deleted successfully`);
+                console.log(`User deleted successfully`);
                 await fetchUsers();
             } else {
                 throw new Error(`Delete failed: ${response.statusText}`);  // Log error status
             }
-
-            const data = await response;
-            console.log(`${user.username}, User deletion successful:`, data);  // Log success
         } catch (error) {
             console.error('Error deleting user:', error);  // Log detailed error
         }
     };
 
+    const handleChangeUsername = async (user) => {
+        try {
+            const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/username?username=${user.username}&newUsername=${newUsername}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                console.log(`Username changed to ${newUsername}`);
+                setIsEditing(null);  // Exit edit mode
+                setNewUsername(''); //clear username input
+                await fetchUsers();
+            } else {
+                throw new Error('Failed to change username');
+            }
+        } catch (error) {
+            console.error("Error changing username", error);
+        }
+    };
+
+    const handleEditClick = (user) => {
+        setIsEditing(user.username);
+        setNewUsername(user.username);
+    };
+
+    const handleCancelEdit = () => {
+        setIsEditing(null);
+        setNewUsername('');
+    };
+
+    const handleChangeRole = async (user,role) =>{
+        if (role==="USER") {
+            role = "ADMIN";
+        } else {
+            role = "USER";
+        }
+        try {
+            const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/role?username=${user.username}&role=${role}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                console.log(`${user.name}'s role changed successfully`);
+                await fetchUsers();
+            } else {
+                throw new Error(`Role change failed: ${response.statusText}`);  // Log error status
+            }
+        } catch (error) {
+            console.error('Error changin role:', error);  // Log detailed error
+        }
+    }
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -74,7 +153,7 @@ const AdminPage = () => {
 
     useEffect(() => {
         fetchUsers();
-    }, [navigate]);
+    });
 
     return (
         <div>
@@ -108,18 +187,42 @@ const AdminPage = () => {
                 </section>
 
                 <section className='user-management'>
-                    <h2>User Management</h2>
+                    <h2 style={{paddingBottom:'20px'}}>User Management</h2>
                     <div className='resultsGrid'>
                         {users.length > 0 ? (
                             users.map((user, index) => (
                                 <div key={index} className='userCard'>
-                                    <h3>{user.username}</h3>
+                                    {isEditing === user.username ? (
+                                        <input
+                                            type="text"
+                                            value={newUsername}
+                                            onChange={(e) => setNewUsername(e.target.value)}
+                                        />
+                                    ) : (
+                                        <h3>{user.username}</h3>
+                                    )}
                                     <p>{user.roles}</p>
-                                    {isOn===true && (
+                                    {isOn && (
                                         <>
                                             <button className='deleteButton' onClick={() => handleDeleteUser(user)}>X</button>
-                                            <button className='action-button'>Change Username</button>
-                                            <button className='action-button'>Switch Role</button>
+                                            {isEditing === user.username ? (
+                                                <>
+                                                    <button
+                                                        className='action-button'
+                                                        onClick={() => handleChangeUsername(user)}
+                                                    >Save</button>
+                                                    <button
+                                                        className='action-button'
+                                                        onClick={handleCancelEdit}
+                                                    >Cancel</button>
+                                                </>
+                                            ) : (
+                                                <button
+                                                    className='action-button'
+                                                    onClick={() => handleEditClick(user)}
+                                                >Change Username</button>
+                                            )}
+                                            <button className='action-button' onClick={() => handleChangeRole(user,user.roles)}>Switch Role</button>
                                         </>
                                     )}
 
