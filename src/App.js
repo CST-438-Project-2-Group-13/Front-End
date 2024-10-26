@@ -24,7 +24,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/testPage" element={<TestPage />} />
             <Route path="/book/:id" element={<BookDetails />} />
-            <Route path="/ListPage" element={<ListPage />} />
+            <Route path="/list" element={<ListPage />} />
             <Route path="/newList" element={<NewListPage />} />
             <Route path="/editProfile" element={<EditUser />} />
             <Route path="/admin" element={<AdminPage />} />

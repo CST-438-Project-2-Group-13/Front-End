@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './EditUser.css';
-import { useNavigate, Link} from 'react-router-dom';
 import Header from '../Header/Header';
+import './EditUser.css';
+
 export const EditUser = () => {
   const navigate = useNavigate();
   const storedUser = localStorage.getItem('user');
@@ -31,6 +31,19 @@ export const EditUser = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      localStorage.removeItem('user');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   // Update password API call
   const handleChangePassword = async () => {
     try {
@@ -56,16 +69,32 @@ export const EditUser = () => {
 
     if (confirmed) {
       try {
-        const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/users?username=${user.username}&confirm=true`, {
+        const token = localStorage.getItem("token"); // Get token
+        const storedPassword = localStorage.getItem("userPassword");  // Get stored password
+
+        // Check if entered password matches stored password
+        if (currentPassword !== storedPassword) {
+          alert("Password is incorrect. Please check and try again.");
+          return;  // Stop the function if passwords do not match
+        }
+
+        // Make a DELETE request to the API with username, password
+        const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/users?username=${user.username}&password=${currentPassword}`, {
           method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,  // Use token for verification
+            'Content-Type': 'application/json'
+          }
         });
 
         if (response.ok) {
           alert('Account deleted successfully');
           localStorage.removeItem('user');
-          navigate('/');
+          localStorage.removeItem('token');
+          localStorage.removeItem('userPassword');
+          navigate('/login');
         } else {
-          alert('Failed to delete account. Please check your input.');
+          alert('Failed to delete account. Please check your password and try again.');
         }
       } catch (error) {
         console.error('Error deleting account:', error);
@@ -86,47 +115,45 @@ export const EditUser = () => {
         showProfile={true} 
       />
       <div className='container'>
-      
         <div className="header">
           <div className="text">Edit Profile</div>
           <div className="underline"></div>
-      </div>
-      <div className="inputs">
-        <div className="input">
-          <span>Current username: {user.username}</span>
         </div>
-        <div className="input">
-          <input 
-            type="password" 
-            placeholder="Current password" 
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-          />
+        <div className="inputs">
+          <div className="input">
+            <span>Current username: {user.username}</span>
+          </div>
+          <div className="input">
+            <input 
+              type="password" 
+              placeholder="Current password" 
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input 
+              type="text" 
+              placeholder="New username" 
+              value={newUsername}
+              onChange={(e) => setNewUsername(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input 
+              type="password" 
+              placeholder="New password" 
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="input">
-          <input 
-            type="text" 
-            placeholder="New username" 
-            value={newUsername}
-            onChange={(e) => setNewUsername(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <input 
-            type="password" 
-            placeholder="New password" 
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
+        <div className="submit-container">
+          <button className="submit" onClick={handleChangeUsername}>Update Username</button>
+          <button className="submit" onClick={handleChangePassword}>Update Password</button>
+          <button className="submit delete" onClick={handleDeleteAccount}>Delete Account</button>
         </div>
       </div>
-      <div className="submit-container">
-        <button className="submit" onClick={handleChangeUsername}>Update Username</button>
-        <button className="submit" onClick={handleChangePassword}>Update Password</button>
-        <button className="submit delete" onClick={handleDeleteAccount}>Delete Account</button>
-      </div>
-      </div>
-     
     </div>
   );
 };

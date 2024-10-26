@@ -26,7 +26,7 @@ const Header = ({ user, handleLogout, showWelcome = true, showSignUp = true, sho
               </div>
             )}
             {showMyLists && (
-              <div className='MyLists' onClick={() => navigate('/ListPage')}>
+              <div className='MyLists' onClick={() => navigate('/list')}>
                 <p className='MyListText'>My Lists</p>
               </div>
             )}

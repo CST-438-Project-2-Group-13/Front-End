@@ -8,27 +8,30 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-  try {
-    const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/login?username=${username}&password=${password}`, {
+    try {
+      const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/login?username=${username}&password=${password}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
+  
       if (!response.ok) {
         throw new Error(`Login failed: ${response.statusText}`);
       }
-      
+  
       const token = await response.text();
-      
+  
       if (token !== "Login failed. Check your credentials.") {
         localStorage.setItem("token", token);  // Save the token
+        localStorage.setItem("userPassword", password);
         console.log("Token:", token);
-
+        console.log("Password:", password);
+  
         // Fetch protected data
         const user = await fetchProtectedData();
         console.log("user after /protected", user);
+
         if (user) {
           console.log("User:", user);
           localStorage.setItem("user", JSON.stringify(user));  // Save user data to localStorage
@@ -44,7 +47,6 @@ export const Login = () => {
       alert('Login failed. Please check your credentials and try again.');
     }
   };
-
 
   const fetchProtectedData = async () => {
     const token = localStorage.getItem("token");
@@ -81,6 +83,7 @@ export const Login = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("userPassword");
     console.log("Logged out");
   };
 
