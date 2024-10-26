@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 100px;
     width: 600px;
     background: white;
     padding-bottom: 30px;
@@ -17,14 +16,14 @@
     margin-top: 30px;
 }
 .text {
-    color: #78a498;
+    color: #45C793;
     font-size: 48px;
     font-weight: 600;
 }
 .underline {
     width: 61px;
     height: 6px;
-    background: #78a498;
+    background: #45C793;
     border-radius: 9px;
 }
 .inputs {
@@ -68,7 +67,7 @@
     width: 200px;
     height: 50px;
     color: white;
-    background: #78a498;
+    background: #45C793;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 600;

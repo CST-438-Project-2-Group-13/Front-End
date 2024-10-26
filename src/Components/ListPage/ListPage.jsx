@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './ListPage.css'
-
+import Header from '../Header/Header';
 const ListPage = () => {
   const [wishlists, setWishlists] = useState([]);
   const [selectedWishlist, setSelectedWishlist] = useState(null);
@@ -22,7 +22,7 @@ const ListPage = () => {
   };
 
   const handleBookClick = (book) => {
-    navigate(`/book/${book.title}`, { state: { book } });
+    navigate(`/blbookdetails/${book.title}`, { state: { book } });
   };
 
   const handleLogout = () => {
@@ -38,12 +38,15 @@ const ListPage = () => {
 
   return (
     <div className='page-container'>
-      <div className='topBar'>
-        <div><Link to="/search" className='title'>PlotPicks</Link></div>
-        <div className='auth-container'>
-          <div className='Logout'><button onClick={handleLogout}>LOG OUT</button></div>
-        </div>
-      </div>
+      <Header 
+        user={user} 
+        handleLogout={handleLogout} 
+        showWelcome={false} 
+        showSignUp={true} 
+        showSearch={true} 
+        showMyLists={true} 
+        showProfile={true} 
+      />
       <div className='main-layout'>
         <div className='wishlist-section'>
           <h2>Your Wishlists</h2>

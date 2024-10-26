@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './EditUser.css';
-
+import { useNavigate, Link} from 'react-router-dom';
+import Header from '../Header/Header';
 export const EditUser = () => {
   const navigate = useNavigate();
   const storedUser = localStorage.getItem('user');
@@ -74,10 +75,21 @@ export const EditUser = () => {
   };
 
   return (
-    <div className='container'>
-      <div className="header">
-        <div className="text">Edit Profile</div>
-        <div className="underline"></div>
+    <div>
+      <Header 
+        user={user} 
+        handleLogout={handleLogout} 
+        showWelcome={false} 
+        showSignUp={true} 
+        showSearch={true} 
+        showMyLists={true} 
+        showProfile={true} 
+      />
+      <div className='container'>
+      
+        <div className="header">
+          <div className="text">Edit Profile</div>
+          <div className="underline"></div>
       </div>
       <div className="inputs">
         <div className="input">
@@ -113,6 +125,8 @@ export const EditUser = () => {
         <button className="submit" onClick={handleChangePassword}>Update Password</button>
         <button className="submit delete" onClick={handleDeleteAccount}>Delete Account</button>
       </div>
+      </div>
+     
     </div>
   );
 };
