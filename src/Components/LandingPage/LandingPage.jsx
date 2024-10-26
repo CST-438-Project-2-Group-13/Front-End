@@ -10,25 +10,11 @@ export const LandingPage = () => {
   const storedUser = localStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
 
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user'); // Remove user data
-      navigate('/login'); // Redirect to login after logout
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   return (
     <div>
       {/* Use the Header component with props */}
       <Header 
         user={user} 
-        handleLogout={handleLogout} 
         showWelcome={true} 
         showSignUp={true} 
         showSearch={true} 
@@ -49,7 +35,7 @@ export const LandingPage = () => {
               </div>
             </div>
           </div>
-          {user && (
+          {/* {user && (
             <div className="button-container">
               <div className="small-button" onClick={() => navigate('/search')}>
                 <p className="small-button-text">Search books</p>
@@ -58,8 +44,14 @@ export const LandingPage = () => {
                 <p className="small-button-text">Edit Profile</p>
               </div>
             </div>
-          )}
+          )} */}
         </div>
+      </div>
+      <div className='aboutContainer'>
+          <h1 class="about-title">Build. Add. Organize.</h1>
+          <div class="about-description">
+            <p>Search Books And Create Lists</p>
+            </div>
       </div>
     </div>
   );
