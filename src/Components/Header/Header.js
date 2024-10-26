@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useHandleLogout } from '../utils/handleUtil';
 import './Header.css';
 
-const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true, showMyLists = true, showProfile = true }) => {
+const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true, showMyLists = true, showProfile = true, showAdmin }) => {
   const navigate = useNavigate();
   const [hasWishlists, setHasWishlists] = useState(false);
   const handleLogout = useHandleLogout();
@@ -52,6 +52,12 @@ const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true
             {!hasWishlists && (
               <p className='noListMessage'></p>
             )}
+
+            {showAdmin && (
+              <div className='MyLists' onClick={() => navigate('/admin')}>
+                <p className='MyListText'>Admin</p>
+              </div>
+              )}
 
             {/* My Lists and Profile links */}
             {showMyLists && (
