@@ -75,20 +75,6 @@ const BookDetails = () => {
       console.log(error);
     }
   };
-
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -109,7 +95,6 @@ const BookDetails = () => {
     <div>
       <Header 
         user={currentUser} 
-        handleLogout={handleLogout} 
         showWelcome={false} 
         showSignUp={true} 
         showSearch={true} 
@@ -134,36 +119,34 @@ const BookDetails = () => {
 
             {/* Display a success or error message */}
             {message && <p>{message}</p>}
+            {isModalOpen && (
+              <div className="modal">
+                <h2>Select a Wishlist</h2>
+                <div className="modal-content">
+                  <select className='modalOpt'
+                    value={selectedWishlistId}
+                    onChange={handleWishlistChange}
+                  >
+                    <option value="">-- Select a Wishlist --</option>
+                    {wishlists.map((wishlist) => (
+                      <option key={wishlist.wishlistId} value={wishlist.wishlistId}>
+                        {wishlist.title}
+                      </option>
+                    ))}
+                  </select>
+                    
+                  <button className="addButton1" onClick={addToWishlist} disabled={!selectedWishlistId}>
+                    Add Book
+                  </button>
+                  <button className="closeButton" onClick={handleCloseModal}>
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      {/* Modal for selecting wishlist */}
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Select a Wishlist</h2>
-            <select
-              value={selectedWishlistId}
-              onChange={handleWishlistChange}
-            >
-              <option value="">-- Select a Wishlist --</option>
-              {wishlists.map((wishlist) => (
-                <option key={wishlist.wishlistId} value={wishlist.wishlistId}>
-                  {wishlist.title}
-                </option>
-              ))}
-            </select>
-
-            <button className="addButton" onClick={addToWishlist} disabled={!selectedWishlistId}>
-              Add Book
-            </button>
-            <button className="closeButton" onClick={handleCloseModal}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

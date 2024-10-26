@@ -51,19 +51,6 @@ const SearchPage = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   const handleCardClick = (book) => {
     navigate(`/book/${book.id}`, { state: { book } });
   };
@@ -72,7 +59,6 @@ const SearchPage = () => {
     <div>
       <Header 
         user={user} 
-        handleLogout={handleLogout} 
         showWelcome={false} 
         showSignUp={true} 
         showSearch={true} 

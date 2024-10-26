@@ -6,18 +6,6 @@ export const EditUser = () => {
 
   const user = JSON.parse(localStorage['user']);
   const navigate = useNavigate();
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
 
   const handleSaveChanges = () => {
     // Logic for saving changes
@@ -31,7 +19,6 @@ export const EditUser = () => {
     <div>
       <Header 
         user={user} 
-        handleLogout={handleLogout} 
         showWelcome={false} 
         showSignUp={true} 
         showSearch={true} 
