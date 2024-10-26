@@ -30,13 +30,6 @@ const ListPage = () => {
     navigate(`/blbookdetails/${book.title}`, { state: { book } });
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    console.log("Logged out");
-    navigate("/login");
-  };
-
   const handleCreateNewWishlist = () => {
     navigate("/newList"); // Navigate to the new wishlist creation page
   };
@@ -67,7 +60,6 @@ const ListPage = () => {
     <div className='page-container'>
       <Header 
         user={user} 
-        handleLogout={handleLogout} 
         showWelcome={false} 
         showSignUp={true} 
         showSearch={true} 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './NewListPage.css';
+import Header from '../Header/Header';
 
 const NewListPage = () => {
   const [title, setTitle] = useState('');
@@ -32,6 +34,15 @@ const NewListPage = () => {
   };
 
   return (
+    <div>
+      <Header 
+        user={user} 
+        showWelcome={false} 
+        showSignUp={true} 
+        showSearch={true} 
+        showMyLists={true} 
+        showProfile={true} 
+      />
     <div className='new-list-container'>
       <h2>Create a New Wishlist</h2>
       <form onSubmit={handleCreateList}>
@@ -56,6 +67,7 @@ const NewListPage = () => {
         </div>
         <button type='submit' className='createButton'>Create Wishlist</button>
       </form>
+    </div>
     </div>
   );
 };

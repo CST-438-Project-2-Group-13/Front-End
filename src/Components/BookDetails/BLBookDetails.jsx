@@ -92,7 +92,6 @@ const BLBookDetails = () => {
     <div>
       <Header 
         user={currentUser} 
-        handleLogout={handleLogout} 
         showWelcome={false} 
         showSignUp={true} 
         showSearch={true} 

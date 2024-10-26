@@ -10,25 +10,11 @@ export const LandingPage = () => {
   const storedUser = localStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
 
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user'); // Remove user data
-      navigate('/login'); // Redirect to login after logout
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   return (
     <div>
       {/* Use the Header component with props */}
       <Header 
         user={user} 
-        handleLogout={handleLogout} 
         showWelcome={true} 
         showSignUp={true} 
         showSearch={true} 
