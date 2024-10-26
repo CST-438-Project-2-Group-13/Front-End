@@ -31,19 +31,6 @@ export const EditUser = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   // Update password API call
   const handleChangePassword = async () => {
     try {
