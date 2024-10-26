@@ -60,13 +60,7 @@ const Header = ({ user, showAdmin = user.roles == 'ADMIN', showWelcome = true, s
 
             {!hasWishlists && (
               <p className='noListMessage'></p>
-            )}
-
-            {showAdmin && (
-              <div className='MyLists' onClick={() => navigate('/admin')}>
-                <p className='MyListText'>Admin</p>
-              </div>
-              )}
+            )}            
 
             {/* My Lists and Profile links */}
             {showMyLists && (
