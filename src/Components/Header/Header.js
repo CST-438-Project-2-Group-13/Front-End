@@ -60,7 +60,7 @@ const Header = ({ user, showAdmin = user.roles == 'ADMIN', showWelcome = true, s
 
             {!hasWishlists && (
               <p className='noListMessage'></p>
-            )}            
+            )}
 
             {/* My Lists and Profile links */}
             {showMyLists && (
