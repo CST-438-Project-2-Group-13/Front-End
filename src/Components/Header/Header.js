@@ -62,12 +62,6 @@ const Header = ({ user, showAdmin = user.roles == 'ADMIN', showWelcome = true, s
               <p className='noListMessage'></p>
             )}
 
-            {showAdmin && (
-              <div className='MyLists' onClick={() => navigate('/admin')}>
-                <p className='MyListText'>Admin</p>
-              </div>
-              )}
-
             {/* My Lists and Profile links */}
             {showMyLists && (
               <div className='MyLists' onClick={() => navigate('/list')}>
