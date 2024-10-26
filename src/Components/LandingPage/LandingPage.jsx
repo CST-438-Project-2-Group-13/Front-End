@@ -10,7 +10,7 @@ export const LandingPage = () => {
   const storedUser = localStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
   let admin = false;
-  if (user.roles === "ADMIN") {
+  if (user!= null && user.roles === "ADMIN") {
     admin = true;
   }
 
