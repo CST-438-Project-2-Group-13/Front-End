@@ -88,6 +88,25 @@ const BLBookDetails = () => {
     setSelectedWishlistId(selectedWishlistId);
     setSelectedWishlistTitle(selectedWishlist ? selectedWishlist.title : '');
   };
+  const deleteBookFromWishlist = async (bookId) => {
+    const url = `https://wishlist-6d2453473a19.herokuapp.com/api/books/${bookId}`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      setMessage('Book successfully deleted from wishlist');
+      console.log(`Book with ID ${bookId} deleted successfully.`);
+      await new Promise(resolve => setTimeout(resolve, 1500)); 
+      navigate('/ListPage');
+    } catch (error) {
+      console.error('Failed to delete the book:', error);
+    }
+  };
   return (
     <div>
       <Header 
@@ -108,7 +127,7 @@ const BLBookDetails = () => {
             <p><strong>Author:</strong> {book.authors}</p>
             <p><strong>Category: </strong>{book.categories}</p>
             <p className='description'><strong>Description:</strong> {book.description}</p>
-            <button className="removeButton"> need to add remove function</button>
+            <button className="removeButton" onClick={() => deleteBookFromWishlist(book.id)}> Delete Book From List </button>
             {/* Display a success or error message */}
             {message && <p>{message}</p>}
           </div>
