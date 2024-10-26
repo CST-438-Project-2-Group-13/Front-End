@@ -53,6 +53,7 @@ export const EditUser = () => {
 
       if (response.ok) {
         alert('Password updated successfully');
+        localStorage.setItem("userPassword", newPassword);
         navigate('/');
       } else {
         alert('Failed to update password. Please check your input.');
