@@ -31,14 +31,14 @@ export const LandingPage = () => {
           <div className='getstartedCont'>
             <div className='getStarted'>
               <div>
-                <Link to={user ? "/ListPage" : "/login"} className='getStartedText'>Get Started</Link>
+                <Link to={user ? "/list" : "/login"} className='getStartedText'>Get Started</Link>
               </div>
             </div>
           </div>
           {/* {user && (
             <div className="button-container">
               <div className="small-button" onClick={() => navigate('/search')}>
-                <p className="small-button-text">Search books</p>
+                <p className="small-button-text">Search Books</p>
               </div>
               <div className="small-button" onClick={() => navigate('/editProfile')}>
                 <p className="small-button-text">Edit Profile</p>

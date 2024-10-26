@@ -55,7 +55,7 @@ const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true
 
             {/* My Lists and Profile links */}
             {showMyLists && (
-              <div className='MyLists' onClick={() => navigate('/ListPage')}>
+              <div className='MyLists' onClick={() => navigate('/list')}>
                 <p className='MyListText'>My Lists</p>
               </div>
             )}

@@ -31,7 +31,7 @@ const ListPage = () => {
   };
 
   const handleCreateNewWishlist = () => {
-    navigate("/newList"); // Navigate to the new wishlist creation page
+    navigate("/new"); // Navigate to the new wishlist creation page
   };
 
   const handleDeleteWishlist = (wishlistId) => {
