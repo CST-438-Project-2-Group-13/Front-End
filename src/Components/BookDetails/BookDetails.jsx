@@ -70,6 +70,8 @@ const BookDetails = () => {
 
       setMessage(`Book successfully added to ${selectedWishlistTitle}!`);
       setIsModalOpen(false); // Close the modal after success
+      await new Promise(resolve => setTimeout(resolve, 1500)); 
+      navigate('/search');
     } catch (error) {
       setMessage(`Error: ${error.message}`);
       console.log(error);
