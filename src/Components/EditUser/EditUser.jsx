@@ -107,7 +107,6 @@ export const EditUser = () => {
     <div>
       <Header 
         user={user} 
-        handleLogout={handleLogout} 
         showWelcome={false} 
         showSignUp={true} 
         showSearch={true} 

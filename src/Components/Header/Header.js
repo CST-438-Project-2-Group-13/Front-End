@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useHandleLogout } from '../utils/handleUtil';
 import './Header.css';
 
-const Header = ({ user, handleLogout, showWelcome = true, showSignUp = true, showSearch = true, showMyLists = true, showProfile = true }) => {
+const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true, showMyLists = true, showProfile = true }) => {
   const navigate = useNavigate();
-  
+  const [hasWishlists, setHasWishlists] = useState(false);
+  const handleLogout = useHandleLogout();
+  useEffect(() => {
+    if (user) {
+      const fetchWishlists = async () => {
+        try {
+          const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/wishlists/user/${user.userId}`);
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setHasWishlists(true);
+          } else {
+            setHasWishlists(false);
+          }
+        } catch (error) {
+          console.error('Error fetching wishlists:', error);
+          setHasWishlists(false); 
+        }
+      };
+      
+      fetchWishlists();
+    }
+  }, [user]);
+
   return (
     <div className='topBar'>
       <div><Link to="/" className='title'>PlotPicks</Link></div>
@@ -19,12 +42,18 @@ const Header = ({ user, handleLogout, showWelcome = true, showSignUp = true, sho
       <div className='auth-container'>
         {user ? (
           <>
-            {/* Conditionally render the Search Books, My Lists, Profile options based on props */}
-            {showSearch && (
+            {/*Only shows search books if user has a list */}
+            {showSearch && hasWishlists && (
               <div className='SearchBooks' onClick={() => navigate('/search')}>
                 <p className='SearchBooksText'>Search Books</p>
               </div>
             )}
+
+            {!hasWishlists && (
+              <p className='noListMessage'></p>
+            )}
+
+            {/* My Lists and Profile links */}
             {showMyLists && (
               <div className='MyLists' onClick={() => navigate('/list')}>
                 <p className='MyListText'>My Lists</p>
