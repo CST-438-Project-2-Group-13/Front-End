@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useHandleLogout } from '../utils/handleUtil';
 import './Header.css';
 
-const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true, showMyLists = true, showProfile = true }) => {
+const Header = ({ user, showAdmin = user.roles == 'ADMIN', showWelcome = true, showSignUp = true, showSearch = true, showMyLists = true, showProfile = true }) => {
   const navigate = useNavigate();
   const [hasWishlists, setHasWishlists] = useState(false);
   const handleLogout = useHandleLogout();
@@ -23,6 +23,8 @@ const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true
           setHasWishlists(false); 
         }
       };
+
+      
       
       fetchWishlists();
     }
@@ -42,6 +44,13 @@ const Header = ({ user, showWelcome = true, showSignUp = true, showSearch = true
       <div className='auth-container'>
         {user ? (
           <>
+            {/*Only shows admin if user is an admin */}
+            {showAdmin && (
+              <div className='SearchBooks' onClick={() => navigate('/admin')}>
+                <p className='SearchBooksText'>Admin</p>
+              </div>
+            )}
+
             {/*Only shows search books if user has a list */}
             {showSearch && hasWishlists && (
               <div className='SearchBooks' onClick={() => navigate('/search')}>
