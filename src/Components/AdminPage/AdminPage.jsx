@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './AdminPage.css';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 
 const AdminPage = () => {
@@ -9,6 +12,14 @@ const AdminPage = () => {
     const [newUsername, setNewUsername] = useState('');
     const navigate = useNavigate();
     const [isOn, setIsOn] = useState(false); // Initial state is "off"
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [newUsername2, setNewUsername2] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+
+    const handleOpenModal = () => setIsModalOpen(true);
+    const handleCloseModal = () => setIsModalOpen(false);
+
     const token = localStorage.getItem('token');
 
     const handleToggle = () => {
@@ -17,9 +28,16 @@ const AdminPage = () => {
         setNewUsername('');
     };
 
-    const handleAddNewUser = async (username,password,role) => {
+    const [isChecked, setRole] = useState(false);
+
+    const handleSetRole = (e) => {
+        setRole(e.target.checked);
+    };
+
+    const handleAddNewUser = async () => {
+        let role = isChecked === true ? "ADMIN" : "USER";
         try {
-            const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users?username=${username}&password=${password}&role=${role}`, {
+            const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users?username=${newUsername2}&password=${newPassword}&role=${role}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -28,8 +46,10 @@ const AdminPage = () => {
 
             if (response.ok) {
                 console.log(`User created successfully`);
+                handleCloseModal();
                 await fetchUsers();
             } else {
+                alert("User creation failed")
                 throw new Error(`User creation failed: ${response.statusText}`);  // Log error status
             }
         } catch (error) {
@@ -38,6 +58,10 @@ const AdminPage = () => {
     };
 
     const handleDeleteUser = async (user) => {
+        if (user.username === currentUser.username) {
+            alert("Can not delete own account");
+            return;
+        }
         const isConfirmed = window.confirm(`Are you sure you want to delete ${user.username}?`);
 
         if (!isConfirmed) {
@@ -94,11 +118,7 @@ const AdminPage = () => {
     };
 
     const handleChangeRole = async (user,role) =>{
-        if (role==="USER") {
-            role = "ADMIN";
-        } else {
-            role = "USER";
-        }
+        role = role === "USER" ? "ADMIN" : "USER";
         try {
             const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/role?username=${user.username}&role=${role}`, {
                 method: 'PATCH',
@@ -114,7 +134,7 @@ const AdminPage = () => {
                 throw new Error(`Role change failed: ${response.statusText}`);  // Log error status
             }
         } catch (error) {
-            console.error('Error changin role:', error);  // Log detailed error
+            console.error('Error changing role:', error);  // Log detailed error
         }
     }
 
@@ -126,8 +146,6 @@ const AdminPage = () => {
     };
 
     const fetchUsers = async () => {
-        const token = localStorage.getItem('token'); // Get the token from localStorage
-
         if (token) {
             try {
                 const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/api/admin/users`, {
@@ -178,8 +196,47 @@ const AdminPage = () => {
                         </label>
                         <p>{isOn ? "Editing" : "Edit Users"}</p>
                     </div>
-                    <div style={{alignContent:'center'}}>
-                        <button  className='action-button'>Add New User</button>
+                    <div style={{alignContent: 'center'}}>
+                            <button className='action-button' onClick={handleOpenModal}>Add New User</button>
+
+                        <Modal
+                            isOpen={isModalOpen}
+                            onRequestClose={handleCloseModal}
+                            contentLabel="Add New User"
+                            className="modal"
+                            overlayClassName="overlay"
+                        >
+                            <div style={{display:'flex',flexDirection:'column', justifyContent:'center'}}>
+                                <h2>Add New User</h2>
+                                <div className='inputs'>
+                                    <input
+                                        type="text"
+                                        placeholder="Username"
+                                        value={newUsername2}
+                                        onChange={(e) => setNewUsername2(e.target.value)}
+                                    />
+                                    <input
+                                        type="password"
+                                        placeholder="Password"
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                    />
+                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                        <p style={{marginRight: '8px'}}>Admin?</p>
+                                        <input
+                                            type="checkbox"
+                                            checked={isChecked}
+                                            onChange={handleSetRole}
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <button className='action-button' onClick={handleAddNewUser}>Add User</button>
+                                    <button className='action-button' onClick={handleCloseModal}>Cancel</button>
+                                </div>
+
+                            </div>
+                        </Modal>
                     </div>
                 </div>
 
@@ -189,12 +246,12 @@ const AdminPage = () => {
                 </section>
 
                 <section className='user-management'>
-                    <h2 style={{paddingBottom:'20px'}}>User Management</h2>
+                    <h2 style={{paddingBottom: '20px'}}>User Management</h2>
                     <div className='resultsGrid'>
                         {users.length > 0 ? (
                             users.map((user, index) => (
                                 <div key={index} className='userCard'>
-                                    {isEditing === user.username ? (
+                                {isEditing === user.username ? (
                                         <input
                                             type="text"
                                             value={newUsername}
