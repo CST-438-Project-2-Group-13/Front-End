@@ -9,6 +9,10 @@ export const LandingPage = () => {
   // Retrieve user from localStorage
   const storedUser = localStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
+  let admin = false;
+  if (user!= null && user.roles === "ADMIN") {
+    admin = true;
+  }
 
   return (
     <div>
@@ -19,7 +23,8 @@ export const LandingPage = () => {
         showSignUp={true} 
         showSearch={true} 
         showMyLists={true} 
-        showProfile={true} 
+        showProfile={true}
+        showAdmin={admin}
       />
 
       <div className='imageBackground'>
@@ -31,14 +36,14 @@ export const LandingPage = () => {
           <div className='getstartedCont'>
             <div className='getStarted'>
               <div>
-                <Link to={user ? "/ListPage" : "/login"} className='getStartedText'>Get Started</Link>
+                <Link to={user ? "/list" : "/login"} className='getStartedText'>Get Started</Link>
               </div>
             </div>
           </div>
           {/* {user && (
             <div className="button-container">
               <div className="small-button" onClick={() => navigate('/search')}>
-                <p className="small-button-text">Search books</p>
+                <p className="small-button-text">Search Books</p>
               </div>
               <div className="small-button" onClick={() => navigate('/editProfile')}>
                 <p className="small-button-text">Edit Profile</p>
