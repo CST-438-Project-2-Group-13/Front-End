@@ -9,6 +9,10 @@ export const LandingPage = () => {
   // Retrieve user from localStorage
   const storedUser = localStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
+  let admin = false;
+  if (user!= null && user.roles === "ADMIN") {
+    admin = true;
+  }
 
   return (
     <div>
@@ -19,7 +23,8 @@ export const LandingPage = () => {
         showSignUp={true} 
         showSearch={true} 
         showMyLists={true} 
-        showProfile={true} 
+        showProfile={true}
+        showAdmin={admin}
       />
 
       <div className='imageBackground'>

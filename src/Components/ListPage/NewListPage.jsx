@@ -24,7 +24,7 @@ const NewListPage = () => {
 
       if (response.ok) {
         // If successful, navigate back to the list page
-        navigate('/ListPage');
+        navigate('/list');
       } else {
         console.error('Error creating wishlist');
       }
