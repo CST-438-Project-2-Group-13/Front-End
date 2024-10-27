@@ -102,7 +102,7 @@ const BLBookDetails = () => {
       setMessage('Book successfully deleted from wishlist');
       console.log(`Book with ID ${bookId} deleted successfully.`);
       await new Promise(resolve => setTimeout(resolve, 1500)); 
-      navigate('/ListPage');
+      navigate('/list');
     } catch (error) {
       console.error('Failed to delete the book:', error);
     }
