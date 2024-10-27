@@ -31,22 +31,35 @@ export const EditUser = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   // Update password API call
   const handleChangePassword = async () => {
     try {
+      const storedPassword = localStorage.getItem("userPassword");  // Get stored password
+      const passwordRequirements = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+      // Check if entered password matches stored password
+      if (currentPassword !== storedPassword) {
+        alert("Please confirm your current password.");
+        console.log("Entered password:", currentPassword);
+        console.log("Current password:", storedPassword);
+        return;  // Stop the function if passwords do not match
+      }
+
+      if (!newPassword) {
+        alert("Please enter a new password.");
+        return;
+      }
+
+      if (newPassword === storedPassword) {
+        alert("Your new password cannot be the same as your current password. Please choose a different password.");
+        return;
+      }
+
+      if (!passwordRequirements.test(newPassword)) {
+        alert("Password must be at least 6 characters long, include at least one letter, one number, and one special character.");
+        return;
+      }
+
       const response = await fetch(`https://wishlist-6d2453473a19.herokuapp.com/password?username=${user.username}&currentPassword=${currentPassword}&newPassword=${newPassword}`, {
         method: 'PATCH',
       });
@@ -54,6 +67,7 @@ export const EditUser = () => {
       if (response.ok) {
         alert('Password updated successfully');
         localStorage.setItem("userPassword", newPassword);
+        console.log("New password:", newPassword);
         navigate('/');
       } else {
         alert('Failed to update password. Please check your input.');
@@ -71,12 +85,13 @@ export const EditUser = () => {
     if (confirmed) {
       try {
         const token = localStorage.getItem("token"); // Get token
-        const storedPassword = localStorage.getItem("userPassword");  // Get stored password
+        const storedPassword = localStorage.getItem("userPassword");
 
-        // Check if entered password matches stored password
         if (currentPassword !== storedPassword) {
           alert("Password is incorrect. Please check and try again.");
-          return;  // Stop the function if passwords do not match
+          console.log("Entered password:", currentPassword);
+          console.log("Current password:", storedPassword);
+          return;
         }
 
         // Make a DELETE request to the API with username, password

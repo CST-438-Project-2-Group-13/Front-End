@@ -79,14 +79,6 @@ export const Login = () => {
   };
 
 
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("userPassword");
-    console.log("Logged out");
-  };
-
   return (
     <div className='container'>
       <div className="header">

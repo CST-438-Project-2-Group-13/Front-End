@@ -13,18 +13,6 @@ const BLBookDetails = () => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
   const currentUserId = currentUser.userId;
   const navigate = useNavigate();
-  const handleLogout = async () => {
-    try {
-      await fetch('https://wishlist-6d2453473a19.herokuapp.com/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      localStorage.removeItem('user');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
 
   useEffect(() => {
     const fetchWishlists = async () => {

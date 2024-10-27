@@ -9,6 +9,13 @@ export const Signup = () => {
 
   const handleSignup = async () => {
     try {
+      const passwordRequirements = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+      if (!passwordRequirements.test(password)) {
+        alert("Password must be at least 6 characters long, include at least one letter, one number, and one special character.");
+        return;
+      }
+
       const response = await fetch('https://wishlist-6d2453473a19.herokuapp.com/newuser', {
         method: 'POST',
         headers: {
